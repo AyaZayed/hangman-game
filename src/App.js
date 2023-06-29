@@ -23,45 +23,41 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const handleKeydown = event => {
-      const { key, keyCode } = event
+    const handleKeyDown = event => {
+      const { key, keyCode } = event;
       if (playable && keyCode >= 65 && keyCode <= 90) {
-        const letter = key.toLowerCase()
-        if (wrongLetters.length < 6) {
-          if (word.includes(letter)) {
-            if (!guessedLetters.includes(letter)) {
-              setGuessedLetters(current => [...current, letter])
-            } else {
-              // showNotification()
-              setShowNotification(true)
-              setTimeout(() => {
-                setShowNotification(false)
-              }, 2000)
-            }
+        const letter = key.toLowerCase();
+        if (word.includes(letter)) {
+          if (!guessedLetters.includes(letter)) {
+            setGuessedLetters([...guessedLetters, letter])
           } else {
-
-            if (!wrongLetters.includes(letter)) {
-              setWrongLetters(wrongLetters => [...wrongLetters, letter])
-            } else {
-              // showNotification()
-              setShowNotification(true)
-              setTimeout(() => {
-                setShowNotification(false)
-              }, 2000)
-            }
+            // showNotification
+            setShowNotification(true)
+            setTimeout(() => {
+              setShowNotification(false)
+            }, 2000)
+          }
+        } else {
+          if (!wrongLetters.includes(letter)) {
+            setWrongLetters([...wrongLetters, letter])
+          } else {
+            // showNotification
+            setShowNotification(true)
+            setTimeout(() => {
+              setShowNotification(false)
+            }, 2000)
           }
         }
       }
     }
-    window.addEventListener('keydown', handleKeydown)
-    return () => window.removeEventListener('keydown', handleKeydown)
-  }, [guessedLetters, wrongLetters, playable])
-
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  })
 
   function playAgain() {
     setPlayable(true)
-    setGuessedLetters([])
     setWrongLetters([])
+    setGuessedLetters([])
     fetch('https://random-word-api.herokuapp.com/word?number=1')
       .then(res => res.json())
       .then(data => {
@@ -69,7 +65,7 @@ export default function App() {
       })
   }
 
-  console.log(wrongLetters)
+  console.log(word)
 
   return (
     <>
@@ -83,7 +79,7 @@ export default function App() {
         </div>
 
         <Word word={word} guessedLetters={guessedLetters} />
-        {wrongLetters.length >= 6 ? <Popup word={word} wrongLetters={wrongLetters} setPlayable={setPlayable} playAgain={playAgain} /> : ''}
+        <Popup word={word} playAgain={playAgain} guessedLetters={guessedLetters} wrongLetters={wrongLetters} />
         {/* if same letter gets pressed twice */}
         {showNotification && <Notification />}
       </div>
