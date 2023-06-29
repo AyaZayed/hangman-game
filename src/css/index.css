@@ -2,20 +2,26 @@
   /* font stuff */
   --font-size-basis: 1rem;
   --type-scale: 1.25;
-  --h5: var(--font-size-basis);
+  --h6: var(--font-size-basis);
+  --h5: calc(var(--h6) * var(--type-scale));
   --h4: calc(var(--h5) * var(--type-scale));
   --h3: calc(var(--h4) * var(--type-scale));
   --h2: calc(var(--h3) * var(--type-scale));
   --h1: calc(var(--h2) * var(--type-scale));
-  --font-small: calc(0.667rem);
-  --font-family: 'Open Sans', sans-serif;
+  --font-small: calc(0.8rem);
+  --font-family: 'Rubik', sans-serif;
   /* colors */
-
+  --primary-color: #003049;
+  --text-color: #fff;
+  --bright-blue: #80ffdb;
 }
 
 html {
   font-size: 100%;
   font-family: var(--font-family);
+  box-sizing: border-box;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 ul {
@@ -42,14 +48,20 @@ h5 {
   font-size: var(--h5);
 }
 
+h6 {
+  font-size: var(--h6);
+}
+
 p {
   font-size: var(--font-size-basis);
 }
 
-/* ::-moz-selection {
-  background-color: var(--primary-color);
+::-moz-selection {
+  background-color: var(--bright-blue);
+  color: var(--primary-color);
 }
 
 ::selection {
-  background-color: var(--primary-color);
-} */
+  background-color: var(--bright-blue);
+  color: var(--primary-color);
+}
