@@ -4,7 +4,7 @@ This is a game where you try to guess a hidden word and you have 6 guesses to ge
 
 ## Screenshot
 
-![Screenshot](https://res.cloudinary.com/dcfrq5i2y/image/upload/v1688074355/projects%20screenshots/hangman_c5mqjg.png)
+![Screenshot](https://res.cloudinary.com/dcfrq5i2y/image/upload/v1688074355/projects%20screenshots/Hangman.png)
 
 To use this app run these commands:
 
